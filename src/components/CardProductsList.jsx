@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
+import AppContext from '../context/AppContext';
 import CardProducts from './CardProducts';
 
 function CardProductsList({ listProducts, site }) {
+  const { categoryName } = useContext(AppContext);
+
   return (
     <ul>
       {listProducts && listProducts.map((prod) => (
@@ -10,7 +13,7 @@ function CardProductsList({ listProducts, site }) {
           <CardProducts
             thumbnail={prod.thumbnail}
             title={prod.title}
-            category={prod.category_id}
+            category={categoryName !== null ? categoryName : prod.category_id}
             price={prod.price}
             site={site}
             link={prod.permalink}

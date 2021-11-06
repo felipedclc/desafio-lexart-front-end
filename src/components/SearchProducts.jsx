@@ -1,24 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
-import getCategories, { getProductsByCategoryId, getProductsFromCategoryAndQuery } from '../api/mercadoLivre';
+import AppContext from '../context/AppContext';
+import { getProductsByCategoryId, getProductsFromCategoryAndQuery } from '../api/mercadoLivre';
 import CardProductsList from './CardProductsList';
 import backEndApi, { webScrapPython } from '../api/backEndApi';
 
 function SearchProducts() {
-  const [categories, setCategories] = useState([]);
-  const [categoryId, setCategoryId] = useState('');
+  const { categories, setCategoryName } = useContext(AppContext);
+  const [categoryId, setCategoryId] = useState(0);
   const [productsList, setProductsList] = useState([]);
   const [searchInput, setSearchInput] = useState('');
   const [isBuscape, setIsBuscape] = useState(false);
-
-  useEffect(() => {
-    getCategories().then((res) => setCategories(res));
-  }, []);
 
   const getProductsByCategoryName = async (name) => {
     const categorySelected = Object.values(categories).find((cat) => cat.name === name);
@@ -26,9 +23,9 @@ function SearchProducts() {
     return getProductsByCategoryId(categorySelected.id);
   };
 
-  const handleChangeDropDown = (e) => {
-    const catName = e.value;
-    getProductsByCategoryName(catName).then((res) => setProductsList(res.results));
+  const handleChangeDropDown = ({ value }) => {
+    setCategoryName(value);
+    getProductsByCategoryName(value).then((res) => setProductsList(res.results));
   };
 
   const handleInputChange = ({ target: { value } }) => {
