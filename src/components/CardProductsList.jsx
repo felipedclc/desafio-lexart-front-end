@@ -6,7 +6,7 @@ function CardProductsList({ listProducts, site }) {
   return (
     <ul>
       {listProducts && listProducts.map((prod) => (
-        <li key={prod.id}>
+        <li key={prod.permalink}>
           <CardProducts
             thumbnail={prod.thumbnail}
             title={prod.title}
