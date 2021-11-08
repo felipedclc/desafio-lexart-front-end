@@ -57,13 +57,18 @@ function SearchProducts() {
     />
   );
 
+  const clickInBuscapeButton = () => {
+    setIsBuscape(true);
+    setCategoryName(null);
+  };
+
   return (
     <div>
       <ButtonGroup aria-label="Select a choice">
         <Button onClick={() => setIsBuscape(false)} variant="secondary">
           Mercado Livre
         </Button>
-        <Button onClick={() => setIsBuscape(true)} variant="secondary">
+        <Button onClick={clickInBuscapeButton} variant="secondary">
           Buscapé
         </Button>
       </ButtonGroup>
