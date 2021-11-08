@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const backEndApi = axios.create({
-  baseURL: process.env.REACT_API_URL_NODE,
+const backEndNode = axios.create({
+  baseURL: process.env.REACT_API_URL_NODE || 'http://localhost:3001',
 });
 
-const webScrapPython = axios.create({
-  baseURL: process.env.REACT_API_URL_FLASK,
+const webScrapFlask = axios.create({
+  baseURL: process.env.REACT_API_URL_FLASK || 'http://localhost:5000',
 });
 
-export { backEndApi, webScrapPython };
+export { backEndNode, webScrapFlask };

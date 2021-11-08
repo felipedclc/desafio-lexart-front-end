@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import AppContext from '../context/AppContext';
 import { getProductsByCategoryId, getProductsFromCategoryAndQuery } from '../api/mercadoLivre';
 import CardProductsList from './CardProductsList';
-import { backEndApi, webScrapPython } from '../api/backEndApi';
+import { backEndNode, webScrapFlask } from '../api/backEndApi';
 
 function SearchProducts() {
   const { categories, setCategoryName } = useContext(AppContext);
@@ -42,12 +42,11 @@ function SearchProducts() {
       products = await getProductsFromCategoryAndQuery(categoryId, searchInput);
       setProductsList(products.results);
     } else {
-      products = await webScrapPython.get(`/${searchInput}`);
-      // console.log(products.data);
+      products = await webScrapFlask.get(`/${searchInput}`);
       setProductsList(products.data);
     }
 
-    await backEndApi.post('/researches', isBuscape ? products.data : products.results);
+    await backEndNode.post('/researches', isBuscape ? products.data : products.results);
   };
 
   const renderDropDown = () => (
