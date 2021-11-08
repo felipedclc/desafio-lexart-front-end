@@ -56,10 +56,12 @@ function SearchProducts() {
       placeholder="Buscar por categoria"
     />
   );
+  const urlBackHeroku = process.env.REACT_API_URL_NODE;
 
   const clickInBuscapeButton = () => {
     setIsBuscape(true);
     setCategoryName(null);
+    console.log(urlBackHeroku);
   };
 
   return (
