@@ -30,10 +30,7 @@ function SearchProducts() {
 
   const handleInputChange = ({ target: { value } }) => {
     const lowerCaseValue = value.toLowerCase();
-    const filterProd = productsList
-      .filter(({ title }) => title.toLowerCase().includes(lowerCaseValue));
-    setSearchInput(value);
-    setProductsList(filterProd);
+    setSearchInput(lowerCaseValue);
   };
 
   const handleClickSearch = async () => {
@@ -56,12 +53,10 @@ function SearchProducts() {
       placeholder="Buscar por categoria"
     />
   );
-  const urlBackHeroku = process.env.REACT_API_URL_NODE;
 
   const clickInBuscapeButton = () => {
     setIsBuscape(true);
     setCategoryName(null);
-    console.log(urlBackHeroku);
   };
 
   return (
